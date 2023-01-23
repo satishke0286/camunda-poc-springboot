@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<databaseChangeLog
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+			xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+			xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	
+		<changeSet author="author.name" id="2 Inserted data in provider table">
+			<!-- Validations -->
+			<preConditions>
+				<tableExists tableName="PROVIDER"/>
+			</preConditions>
+			<!-- Create Table -->
+			<sql>
+				INSERT INTO PROVIDER VALUES (1, 'Marion J. Hinton', 'Marion_NPI_0001', '2769 Fittro Street,Rison,Arkansas,71665', 'Type-1', 'Pending');
+				INSERT INTO PROVIDER VALUES (2, 'Nicholas D. Walters', 'Nicholas_NPI_0002', '2776 Thunder Road,San Francisco,California,94108', 'Type-2', 'Pending');
+				INSERT INTO PROVIDER VALUES (3, 'Edith D. Densmore', 'Edith_NPI_0003', '763 Joyce Street,Fowl River, AL 36523', 'Type-3', 'Pending');
+				INSERT INTO PROVIDER VALUES (4, 'Julietta R. Anderson', 'Julietta_NPI_0004', '3083 Trouser Leg Road,Milwaukee, WI 53202', 'Type-1', 'Pending');
+				INSERT INTO PROVIDER VALUES (5, 'Karen A. Snyder', 'Karen_NPI_0005', '2155 Mill Street,Spartanburg, SC 29302', 'Type-2', 'Pending');
+				INSERT INTO PROVIDER VALUES (6, 'Patricia D. Cowan', 'Patricia_NPI_0005', '312 Ferrell Street,Warroad, MN 56763', 'Type-3', 'Pending');
+			</sql>
+			<comment>Inserted new record in table 'Provider'</comment>
+		</changeSet>
+	</databaseChangeLog>
