@@ -8,12 +8,7 @@ import com.citizen.camunda.poc.service.ProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -31,20 +26,20 @@ public class ProviderController {
 
     @Secured("ROLE_ADMIN")
     @GetMapping
-    public List<ProviderModel> getAllProvider() {
+    public List<ProviderModel> getAllProvider(@RequestParam String token) {
         return providerService.getAllProvider();
     }
 
     @Secured("ROLE_ADMIN")
     @PostMapping("/review")
-    public Map<String, String> getAllProvider(@RequestBody ProviderReviewModel providerReviewModel) {
+    public Map<String, String> getAllProvider(@RequestParam String token, @RequestBody ProviderReviewModel providerReviewModel) {
         return providerService.reviewProvider(providerReviewModel);
     }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/usersDetails")
-    public ResponseEntity<User> getForUsersData(HttpServletRequest httpRequest) {
+    public ResponseEntity<User> getForUsersData(@RequestParam String token,  HttpServletRequest httpRequest) {
         return ResponseEntity.ok().body(
-                userAccessService.isAuthenticated(httpRequest.getHeader("token")).orElse(null));
+                userAccessService.isAuthenticated(token).orElse(null));
     }
 }

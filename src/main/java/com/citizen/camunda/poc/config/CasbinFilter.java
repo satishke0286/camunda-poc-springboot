@@ -36,7 +36,8 @@ public class CasbinFilter implements Filter {
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
     HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-    String sessionId = httpServletRequest.getHeader("token");
+    System.out.println("token >>>> " + httpServletRequest.getParameter("token"));
+    String sessionId = httpServletRequest.getParameter("token");
     Optional<User> u = userAccessService.isAuthenticated(sessionId);
     if (u.isPresent()) {
       String user = u.get().getUsername();
