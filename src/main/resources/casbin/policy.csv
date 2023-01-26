@@ -3,7 +3,9 @@ p, ROLE_ADMIN, /data/users/*, *
 p, ROLE_ADMIN, /data/admins/*, *
 p, ROLE_ADMIN, /provider/*, *
 p, ROLE_USER, /provider/*, *
+p, ROLE_SUB_USER, /provider/*, *
 p, ROLE_ADMIN, /provider, *
+g, subuser, ROLE_SUB_USER
 g, user, ROLE_USER
 g, admin, ROLE_USER
 g, admin, ROLE_ADMIN

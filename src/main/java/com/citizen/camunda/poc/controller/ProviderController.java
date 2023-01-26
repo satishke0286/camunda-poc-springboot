@@ -1,5 +1,6 @@
 package com.citizen.camunda.poc.controller;
 
+import com.citizen.camunda.poc.model.LimitedProviderModel;
 import com.citizen.camunda.poc.model.ProviderModel;
 import com.citizen.camunda.poc.model.ProviderReviewModel;
 import com.citizen.camunda.poc.model.User;
@@ -28,6 +29,12 @@ public class ProviderController {
     @GetMapping
     public List<ProviderModel> getAllProvider(@RequestParam String token) {
         return providerService.getAllProvider();
+    }
+
+    @Secured( {"ROLE_ADMIN", "ROLE_SUB_USER"})
+    @GetMapping("/limited")
+    public List<LimitedProviderModel> getAllLimitedProvider(@RequestParam String token) {
+        return providerService.getAllLimitedProvider();
     }
 
     @Secured("ROLE_ADMIN")

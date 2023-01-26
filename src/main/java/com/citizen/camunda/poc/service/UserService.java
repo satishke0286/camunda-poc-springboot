@@ -22,6 +22,7 @@ public class UserService implements IUserService {
     this.users = new HashMap<>();
     this.users.put("admin", new User("admin", "pwd", "John", "Bob"));
     this.users.put("user", new User("user", "pwd", "Steve", "Smith"));
+    this.users.put("subuser", new User("subuser", "pwd", "Mathew", "Shan"));
   }
 
   @Override

@@ -1,6 +1,7 @@
 package com.citizen.camunda.poc.service;
 
 import com.citizen.camunda.poc.entity.Provider;
+import com.citizen.camunda.poc.model.LimitedProviderModel;
 import com.citizen.camunda.poc.model.ProviderModel;
 import com.citizen.camunda.poc.model.ProviderReviewModel;
 import com.citizen.camunda.poc.repo.ProviderRepository;
@@ -26,6 +27,12 @@ public class ProviderServiceImpl implements ProviderService{
     }
 
     @Override
+    public List<LimitedProviderModel> getAllLimitedProvider() {
+        List<Provider> allProviders = providerRepository.findAll();
+        return allProviders.stream().map(this::getLimitedProviderModel).collect(Collectors.toList());
+    }
+
+    @Override
     public Map<String, String> reviewProvider(ProviderReviewModel providerReviewModel) {
         providerRepository.updateStatusById(providerReviewModel.getId(), providerReviewModel.getStatus());
         return Collections.singletonMap("status", providerReviewModel.getStatus());
@@ -33,6 +40,12 @@ public class ProviderServiceImpl implements ProviderService{
 
     private ProviderModel getProviderModel(Provider providerEntity) {
         ProviderModel providerModel = new ProviderModel();
+        BeanUtils.copyProperties(providerEntity, providerModel);
+        return providerModel;
+    }
+
+    private LimitedProviderModel getLimitedProviderModel(Provider providerEntity) {
+        LimitedProviderModel providerModel = new LimitedProviderModel();
         BeanUtils.copyProperties(providerEntity, providerModel);
         return providerModel;
     }
