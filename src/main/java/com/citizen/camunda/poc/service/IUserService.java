@@ -1,6 +1,7 @@
 package com.citizen.camunda.poc.service;
 
 import com.citizen.camunda.poc.model.User;
+import com.citizen.camunda.poc.model.UserModel;
 
 import java.util.Optional;
 
@@ -10,5 +11,7 @@ public interface IUserService {
   Optional<User> isAuthenticated(String sessionId);
 
   void logout(String sessionId);
+
+  void saveUser(UserModel userModel);
 
 }

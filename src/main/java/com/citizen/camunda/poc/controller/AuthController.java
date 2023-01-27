@@ -1,12 +1,10 @@
 package com.citizen.camunda.poc.controller;
 
+import com.citizen.camunda.poc.model.UserModel;
 import com.citizen.camunda.poc.service.IUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -33,6 +31,12 @@ public class AuthController {
     }
     return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
   }
+
+  @PostMapping("/save")
+  public ResponseEntity<String> save(@RequestBody UserModel userModel) {
+      userAccessService.saveUser(userModel);
+      return ResponseEntity.ok().body("Successfully saved user details.");
+   }
 
   @PostMapping("/logout")
   public ResponseEntity<String> logout() {

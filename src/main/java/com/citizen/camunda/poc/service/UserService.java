@@ -1,13 +1,18 @@
 package com.citizen.camunda.poc.service;
 
 import com.citizen.camunda.poc.model.User;
+import com.citizen.camunda.poc.model.UserModel;
+import com.citizen.camunda.poc.repo.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
@@ -16,6 +21,9 @@ public class UserService implements IUserService {
 
   private final Map<String, User> sessions;
   private final Map<String, User> users;
+
+  @Autowired
+  private UserRepository userRepository;
 
   public UserService() {
     this.sessions = new ConcurrentHashMap<>();
@@ -46,6 +54,14 @@ public class UserService implements IUserService {
   public void logout(String sessionId) {
     logger.info("logout: {}", sessionId);
     sessions.remove(sessionId);
+  }
+
+  @Override
+  public void saveUser(UserModel userModel) {
+    com.citizen.camunda.poc.entity.User user = new com.citizen.camunda.poc.entity.User();
+    BeanUtils.copyProperties(userModel, user);
+//    user.setId(UUID.randomUUID().toString());
+    userRepository.save(user);
   }
 
 }

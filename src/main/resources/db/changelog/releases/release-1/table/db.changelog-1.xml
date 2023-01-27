@@ -40,4 +40,40 @@
 			</rollback>
 			<comment>Created new table named 'PROVIDER'</comment>
 		</changeSet>
+
+	<changeSet author="author.name" id="1 Created new User table">
+		<!-- Validations -->
+		<preConditions>
+			<not>
+				<tableExists tableName="USER"/>
+			</not>
+		</preConditions>
+		<!-- Create Table -->
+
+		<createTable tableName="USER_DETAILS">
+			<column autoIncrement="true" name="id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="FIRST_NAME" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="LAST_NAME" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="EMAIL" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="PASSWORD" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="ADDRESS" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<!-- Roll back -->
+		<rollback>
+			<dropTable tableName="USER_DETAILS"/>
+		</rollback>
+		<comment>Created new table named 'USER_DETAILS'</comment>
+	</changeSet>
 	</databaseChangeLog>
