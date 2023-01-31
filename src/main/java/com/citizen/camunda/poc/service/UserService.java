@@ -1,7 +1,10 @@
 package com.citizen.camunda.poc.service;
 
+import com.citizen.camunda.poc.entity.EmployeeDetails;
+import com.citizen.camunda.poc.model.EmployeeDetailsModel;
 import com.citizen.camunda.poc.model.User;
 import com.citizen.camunda.poc.model.UserModel;
+import com.citizen.camunda.poc.repo.EmployeeRepository;
 import com.citizen.camunda.poc.repo.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,11 +12,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements IUserService {
@@ -24,6 +25,9 @@ public class UserService implements IUserService {
 
   @Autowired
   private UserRepository userRepository;
+
+  @Autowired
+  private EmployeeRepository employeeRepository;
 
   public UserService() {
     this.sessions = new ConcurrentHashMap<>();
@@ -60,8 +64,19 @@ public class UserService implements IUserService {
   public void saveUser(UserModel userModel) {
     com.citizen.camunda.poc.entity.User user = new com.citizen.camunda.poc.entity.User();
     BeanUtils.copyProperties(userModel, user);
-//    user.setId(UUID.randomUUID().toString());
     userRepository.save(user);
+  }
+
+  @Override
+  public List<EmployeeDetailsModel> getAllEmployee() {
+    List<EmployeeDetails> employeeDetailsList = employeeRepository.findAll();
+    return employeeDetailsList.stream().map(this::constructEmployeeDetailsModel).collect(Collectors.toList());
+  }
+
+  private EmployeeDetailsModel constructEmployeeDetailsModel(EmployeeDetails employeeDetails) {
+    EmployeeDetailsModel employeeDetailsModel = new EmployeeDetailsModel();
+    BeanUtils.copyProperties(employeeDetails, employeeDetailsModel);
+    return employeeDetailsModel;
   }
 
 }

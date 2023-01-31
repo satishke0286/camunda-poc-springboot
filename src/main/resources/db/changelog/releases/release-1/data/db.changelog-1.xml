@@ -22,4 +22,18 @@
 			</sql>
 			<comment>Inserted new record in table 'Provider'</comment>
 		</changeSet>
+
+		<changeSet author="author.name" id="2 Inserted data in employee details table">
+			<!-- Validations -->
+			<preConditions>
+				<tableExists tableName="PROVIDER"/>
+			</preConditions>
+			<!-- Create Table -->
+			<sql>
+				INSERT INTO EMPLOYEE_DETAILS VALUES
+				(1, 'Mr. John Heart', '3/16/1964', '1/15/1995', 'CEO', '351 S Hill St', 'Los Angeles', 'California', '(213)555-9208', '(213)555-9392', 'jheartDXskype', 'jhear@dx-email.com'),
+				(2, 'Mr. John Heart', '3/16/1964', '1/15/1995', 'CEO', '351 S Hill St', 'Los Angeles', 'California', '(213)555-9208', '(213)555-9392', 'jheartDXskype', 'jhear@dx-email.com');
+			</sql>
+			<comment>Inserted new record in table 'Provider'</comment>
+		</changeSet>
 	</databaseChangeLog>

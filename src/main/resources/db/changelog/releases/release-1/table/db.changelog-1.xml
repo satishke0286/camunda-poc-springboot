@@ -76,4 +76,58 @@
 		</rollback>
 		<comment>Created new table named 'USER_DETAILS'</comment>
 	</changeSet>
+
+	<changeSet author="author.name" id="1 Created new Employee table">
+		<!-- Validations -->
+		<preConditions>
+			<not>
+				<tableExists tableName="EMPLOYEE_DETAILS"/>
+			</not>
+		</preConditions>
+		<!-- Create Table -->
+
+		<createTable tableName="EMPLOYEE_DETAILS">
+			<column autoIncrement="true" name="id" type="BIGINT">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="EMPLOYEE" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="BIRTH_DATE" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="HIRE_DATE" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="POSITION" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="ADDRESS" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="CITY" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="STATE" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="HOME_PHONE" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="MOBILE_PHONE" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="SKYPE" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="EMAIL" type="VARCHAR(255)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<!-- Roll back -->
+		<rollback>
+			<dropTable tableName="EMPLOYEE_DETAILS"/>
+		</rollback>
+		<comment>Created new table named 'EMPLOYEE_DETAILS'</comment>
+	</changeSet>
 	</databaseChangeLog>

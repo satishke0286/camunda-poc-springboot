@@ -1,5 +1,6 @@
 package com.citizen.camunda.poc.controller;
 
+import com.citizen.camunda.poc.model.EmployeeDetailsModel;
 import com.citizen.camunda.poc.model.UserModel;
 import com.citizen.camunda.poc.service.IUserService;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -43,4 +45,10 @@ public class AuthController {
     userAccessService.logout(httpSession.getId());
     return ResponseEntity.ok().body("logout success!");
   }
+
+  @GetMapping("/getAllEmployee")
+  public ResponseEntity<List<EmployeeDetailsModel>> getAllEmployee() {
+    return ResponseEntity.ok().body(userAccessService.getAllEmployee());
+  }
+
 }
